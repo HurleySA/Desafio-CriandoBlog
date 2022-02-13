@@ -1,1 +1,75 @@
 // TODO
+.container{
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+    margin: 0 auto;
+}
+
+.imagem {
+    margin-top: 80px;
+    margin-bottom: 65px;
+}
+
+.post{
+    margin-bottom: 48px;
+    
+}
+.post:hover{
+    cursor: pointer;
+}
+
+.info{
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.h1{
+    font-family: Inter;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: -0.5px;
+    text-align: justified;
+    color: white;
+    margin-bottom: 8px;
+    
+
+}
+
+.p{  
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: justify; 
+    color: #D7D7D7;
+    margin-bottom: 24px;
+    
+}
+
+.infoP{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BBBBBB;
+    padding: 0px 10px;
+}
+
+.button{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: justify;
+    color: #FF57B2;
+    padding: 16px 0px 80px 0px;
+}
