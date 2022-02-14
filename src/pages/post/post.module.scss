@@ -1,1 +1,76 @@
-// TODO
+.container{
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+    margin: 0 auto;
+}
+
+.banner{
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+    
+}
+
+.img{
+    width: 100%;
+    height: 100%;
+}
+
+.title{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 58px;
+    /* identical to box height */
+
+    letter-spacing: -0.5px;
+
+    /* Heading */
+
+    color: #F8F8F8;
+
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    
+}
+
+.contentTitle{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 140%;
+    /* or 50px */
+    margin: 16px 0px;
+
+    text-align: justify;
+
+    /* Heading */
+
+    color: #F8F8F8;
+
+}
+
+.contentP{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140%;
+    /* or 25px */
+    margin: 16px 0px;
+
+    text-align: justify;
+
+    /* Body */
+
+    color: #D7D7D7;
+
+}

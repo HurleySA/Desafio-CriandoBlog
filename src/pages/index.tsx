@@ -11,6 +11,9 @@ import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { route } from 'next/dist/next-server/server/router';
 interface Post {
   uid?: string;
   first_publication_date: string | null;
@@ -30,16 +33,47 @@ interface HomeProps {
   postsPagination: PostPagination;
 }
 
+
+
 export default function Home({posts, postsPagination}: HomeProps) {
+  const router = useRouter();
+  const [data, setData] = useState(posts);
+  const [existNextPage, setExistNextPage] = useState(!!postsPagination.next_page)
+
+  const handleClick = async (url: string) => {
+    const response = await fetch(url);
+    const json = await response.json();
+
+    const posts = json.results.map(post => {
+      const dataFormatada = format(new Date(post.first_publication_date),'dd MMM yyyy',
+      {
+        locale: ptBR,
+      });
+      
+      return {
+        uid: post.uid,
+        first_publication_date: dataFormatada,
+        data:{
+          title: post.data.title,
+          subtitle: post.data.subtitle,
+          author: post.data.author,
+        }
+      }
+   
+    })
+    
+    setData([...data, ...posts])
+    setExistNextPage(false);
+  }
  return(
    <div className={styles.container}>
     <div className={styles.imagem}>
       <Image src="/images/Logo.svg" alt='logo' width="240" height="26"className='avatar' />
     </div>
-    {posts.map((post => {
+    {data?.map((post => {
       
       return(
-        <a key={post.uid} className={styles.post}>
+        <a key={post.uid} className={styles.post} onClick={() => router.push(`/post/${post.uid}`)}>
           <h1 className={styles.h1}>{post.data.title}</h1>
           <p className={styles.p}>{post.data.subtitle}</p>
           <div className={styles.info}>
@@ -56,7 +90,7 @@ export default function Home({posts, postsPagination}: HomeProps) {
       )
       
     }))}
-      {postsPagination.next_page && <p className={styles.button}>Carregar mais posts</p>}
+      {existNextPage && <a className={styles.button} onClick={() => handleClick(postsPagination.next_page)}>Carregar mais posts</a>}
       
    </div> 
  )
@@ -67,7 +101,7 @@ export const getStaticProps = async () => {
   const postsResponse = await prismic.query(
     Prismic.predicates.at('document.type', 'publication'),
     {
-      pageSize: 1,
+      pageSize: 5,
     }
   );
 
@@ -77,8 +111,8 @@ export const getStaticProps = async () => {
   }
   if(postsResponse.next_page){
     const res = await fetch(postsResponse.next_page);
-  const json = await res.json()
-  const resultsTratados = json.results.map(post => {
+    const json = await res.json()
+    const resultsTratados = json.results.map(post => {
     const dataFormatada = format(new Date(post.first_publication_date),'dd MMM yyyy',
     {
       locale: ptBR,
@@ -115,8 +149,6 @@ export const getStaticProps = async () => {
         subtitle: post.data.subtitle,
         author: post.data.author,
       }
-      
-
     }
  
   })
