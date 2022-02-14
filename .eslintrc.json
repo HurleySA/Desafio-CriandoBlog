@@ -35,7 +35,7 @@
     "import/no-duplicates": "off",
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": ["error",{
-      "endOfLine": "auto",
+      "endOfLine":"auto"
     }],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
